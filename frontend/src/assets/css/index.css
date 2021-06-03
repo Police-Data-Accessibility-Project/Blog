@@ -1,0 +1,108 @@
+
+:root {
+  scroll-behavior: auto;
+  font-family: Montserrat, "Open Sans", Helvetica, Arial, sans-serif;
+  @apply light;
+}
+
+::-moz-selection {
+  background: var(--color-bg-accent);
+  color: var(--color-text-on-accent);
+}
+
+::selection {
+  background: var(--color-bg-accent);
+  color: var(--color-text-on-accent);
+}
+
+
+
+:root {
+    --white: #fffbfa;
+    --white2: rgba(255, 251, 250, 0.9);
+    --grey-light: #bfc0c0;
+    --grey-light-2: #dfe0e0;
+    --grey-dark: #515052;
+    --black: #000103;
+    --gold: #d5a23c;
+    --purple: #442645;
+  }
+
+/* Mirror this to .dark and change the values for a dark theme */
+.light {
+  --color-bg-accent: #d5a23c;;                   /* pdap-gold */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #edf2f7;
+  --color-bg-accent-hover: #613662;             /* lighter variant of pdap-purple */
+
+  --color-text-accent: #d5a23c;                 /* pdap-gold */
+  --color-text-primary: #2d3748;
+  --color-text-secondary: #4a5568;
+  --color-text-tertiary: #4a5568;
+  --color-text-on-accent: #f7fafc;
+
+  --color-fill-primary: #d5a23c;                /* pdap-gold */
+  --color-fill-secondary: #edf2f7;
+
+  --color-gradient-accent1: #00BFFF;
+  --color-gradient-accent2: #4fd1c5;
+
+  --color-code-background: #edf2f7;
+  --color-code-text: #2d3748;
+  --color-code-comment: #718096;
+  --color-code-punctuation: #39adb5;
+  --color-code-const: #7c4dff;
+  --color-code-bool: #7c4dff;
+  --color-code-string: #f6a434;
+  --color-code-var: #e53935;
+  --color-code-func: #3d5afe;
+  --color-code-keyword: #7c4dff;
+  --color-code-regex: #6182b8;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  transition: all 300ms ease 0s;
+  overflow-x: hidden;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  @apply antialiased;
+}
+
+.full-width-container {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+
+/* Tailwind cleans out the CSS, but we do not want that for the markdown blog posts */
+
+.article-content ul{
+    list-style: unset;
+    margin: 0;
+    padding-left: 2em;
+}
+
+.article-content p {
+    margin: 1em;
+}
+
+.article-content a {
+    color: var(--color-text-accent);
+    text-decoration: none;
+}
+
+.article-content a:hover {
+    text-decoration: underline;
+}
+
+.article-content code{
+    background: var(--color-code-background);
+    color: var(--color-code-var);
+    padding: 3px 5px 3px 5px;
+    border-radius: 6px;
+}

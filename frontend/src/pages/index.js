@@ -2,18 +2,16 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import Layout from "../components/layout";
 import ArticlesComponent from "../components/articles";
-import "../assets/css/main.css";
+import Sidebar from "../components/sidebar"
 
 const IndexPage = () => {
   const data = useStaticQuery(query);
 
   return (
     <Layout seo={data.strapiHomepage.seo}>
-      <div className="uk-section">
-        <div className="uk-container uk-container-large">
-          <h1>{data.strapiHomepage.hero.title}</h1>
+      <div className="px-10 flex flex-col lg:flex-row">
           <ArticlesComponent articles={data.allStrapiArticle.edges} />
-        </div>
+          <Sidebar />
       </div>
     </Layout>
   );
@@ -35,14 +33,19 @@ const query = graphql`
         }
       }
     }
-    allStrapiArticle(filter: { status: { eq: "published" } }) {
+    allStrapiArticle(filter: { status: { eq: "published" } }, sort: {order: DESC, fields: publishedAt} ) {
       edges {
         node {
           strapiId
           slug
           title
+          description
+          content
+          publishedAt
+          updated_at
           category {
             name
+            slug
           }
           image {
             localFile {

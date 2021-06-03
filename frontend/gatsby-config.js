@@ -1,8 +1,31 @@
 require("dotenv").config({
   path: `.env`,
-});
+}); 
 
 module.exports = {
+  siteMetadata: {
+    title: `Police Data Accessibility Project Blog`,
+    siteUrl: `https://blog.pdap.io`,
+    description: `We're building a source of truth for police data.`,
+    pages: [
+      {
+        title: "Home",
+        path: "https://pdap.io",
+      },
+      {
+        title: "FAQ",
+        path: "https://pdap.io/faq",
+      },
+      {
+        title: "Docs",
+        path: "https://docs.pdap.io"
+      },
+      {
+        title: "Blog",
+        path: "/"
+      },
+    ],
+  },
   plugins: [
     "gatsby-plugin-react-helmet",
     {
@@ -10,6 +33,14 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /assets/,
+        },
       },
     },
     {
@@ -37,5 +68,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-offline",
+    "gatsby-plugin-postcss"
   ],
 };

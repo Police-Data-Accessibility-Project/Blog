@@ -1,58 +1,77 @@
-import React from "react";
-import { Link, StaticQuery, graphql } from "gatsby";
+import React from "react"
+import PropTypes from "prop-types"
+import { Link } from "gatsby";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons"
 
-const Nav = () => (
-  <StaticQuery
-    query={graphql`
-      query {
-        strapiGlobal {
-          siteName
-        }
-        allStrapiCategory {
-          edges {
-            node {
-              slug
-              name
-            }
+import * as navStyles from "../assets/css/nav.module.css"
+import PaypalDonate from "./PaypalDonate"
+
+export default class Navbar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showSubscribeModal: false,
+      showNav: false,
+      header: "I am Header",
+      footer: "I am Footer",
+      desc: "Hello! I am modal box",
+    }
+    this.showModal = this.showModal.bind(this)
+    this.hideModal = this.hideModal.bind(this)
+  }
+
+  showModal = () => {
+    this.setState({ showSubscribeModal: true })
+  }
+
+  hideModal = () => {
+    this.setState({ showSubscribeModal: false })
+  }
+
+  render() {
+    return (
+      <nav className={navStyles.nav}>
+        <button
+          className={navStyles.nav__menu__button}
+          onClick={() => this.setState({ showNav: !this.state.showNav })}
+        >
+          <FontAwesomeIcon
+            title="navigation menu icon"
+            icon={this.state.showNav ? faTimes : faBars}
+          />
+        </button>
+        <div
+          className={
+            this.state.showNav
+              ? `${navStyles.nav__menu} ${navStyles.nav__menu__open}`
+              : navStyles.nav__menu
           }
-        }
-      }
-    `}
-    render={(data) => (
-      <div>
-        <div>
-          <nav className="uk-navbar-container" data-uk-navbar>
-            <div className="uk-navbar-left">
-              <ul className="uk-navbar-nav">
-                <li>
-                  <Link to="/">{data.strapiGlobal.siteName}</Link>
-                </li>
-              </ul>
-            </div>
-            <div className="uk-navbar-right">
-              <button
-                className="uk-button uk-button-default uk-margin-right"
-                type="button"
+        >
+          {this.props.pages.map(page => {
+            return (
+              <Link
+                activeClassName={navStyles.nav__link__active}
+                partiallyActive={page.path !== "/" ? true : false}
+                className={navStyles.nav__link}
+                to={page.path}
+                key={page.path}
               >
-                Categories
-              </button>
-              <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000">
-                <ul className="uk-nav uk-dropdown-nav">
-                  {data.allStrapiCategory.edges.map((category, i) => (
-                    <li key={`category__${category.node.slug}`}>
-                      <Link to={`/category/${category.node.slug}`}>
-                        {category.node.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </nav>
+                {page.title}
+              </Link>
+            )
+          })}
+          <PaypalDonate />
         </div>
-      </div>
-    )}
-  />
-);
+      </nav>
+    )
+  }
+}
 
-export default Nav;
+Navbar.defaultProps = {
+  pages: [],
+}
+
+Navbar.propTypes = {
+  pages: PropTypes.array.isRequired,
+}
