@@ -4,14 +4,7 @@ PDAP Blog
 # Quickstart
 1. If you don't have yarn installed, run `yarn` in the `frontend` and `backend` directories.
 2. Run [PostgrSQL](https://www.postgresql.org/) locally.
-3. Add an .env file like the following:
-```
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-DATABASE_NAME= $your local user name
-DATABASE_USERNAME= $your local user name
-DATABASE_PASSWORD= $your local user password
-```
+3. Use the `.env.example` file, renaming it to `.env` with your own information.
 4. Run `yarn develop` in the `backend` then the `frontend`.
 5. If your strapi admin panel spins without loading, try deleting your `backend/build` folder and `backend/.cache` and run `yarn develop` again forcing a rebuild.
 
