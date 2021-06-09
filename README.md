@@ -2,7 +2,14 @@ PDAP Blog
 ===
 Use `npm`, do NOT use `yarn`.
 
-# Quickstart
+# Making posts
+1. Ask a current blog admin to add you with the strapi admin panel.
+2. Head to https://blog-admin.pdap.io/admin/ to log in
+3. Click "Add Article".
+4. Every field is required.
+5. Let Eric know when you make a post so he can refresh the front end. Right now, this is not automatic.
+
+# Local Quickstart
 1. If you don't have npm installed, [get npm](https://www.npmjs.com/get-npm).
 2. Run `npm install` in the `frontend` and `backend` directories.
 3. Run [PostgreSQL](https://www.postgresql.org/) locally.
